@@ -6,5 +6,5 @@ const ts = Math.floor(Date.now() / 1000);
 
 const hash = md5(ts + secret! + apikey!);
 
-export const uri = (path: string): string =>
-  `https://gateway.marvel.com/v1/public/${path}?ts=${ts}&apikey=${apikey}&hash=${hash}`;
+export const uri = (path: string, limit = 20, offset = 0): string =>
+  `https://gateway.marvel.com/v1/public/${path}?ts=${ts}&apikey=${apikey}&hash=${hash}&limit=${limit}&offset=${offset}`;

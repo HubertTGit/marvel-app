@@ -1,14 +1,7 @@
-import { HeadingComponent } from '@/components/HeadingComponent';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card';
+import CharactersList from '@/components/CharactersListComponent';
 import { uri } from '@/lib/uri';
 import { Character } from '@/model/api.model';
+import { revalidatePath } from 'next/cache';
 import Image from 'next/image';
 
 export default async function Home() {
@@ -17,30 +10,11 @@ export default async function Home() {
   const result = await getData.json();
   const characters: Character[] = result.data.results;
 
+  console.log(result);
+
   return (
     <>
-      <h1>Marvel</h1>
-      <ul>
-        {result.data.results.map((character: any) => (
-          <li key={character.id}>
-            <Card>
-              <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>Card Description</CardDescription>
-              </CardHeader>
-              <CardContent>
-                extension: Extension;
-                <Image
-                  src={`${character.thumbnail.path}.jpg`}
-                  height={100}
-                  width={100}
-                  alt={character.name}
-                />
-              </CardContent>
-            </Card>
-          </li>
-        ))}
-      </ul>
+      <CharactersList characters={characters} />
     </>
   );
 }
