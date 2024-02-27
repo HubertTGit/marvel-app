@@ -8,6 +8,7 @@ import loadMore from '@/actions/loadMore';
 import { rgbDataURL } from '@/lib/utils';
 import { ThumbSkeletonsComponent } from './ThumbSkeletonsComponent';
 import { CharacterListSkeleton } from './CharacterListSkeleton';
+import { LoadMoreIndicatorComponent } from './LoadMoreIndicatorComponent';
 
 interface CharactersListProps {
   characters: Character[];
@@ -54,6 +55,7 @@ export default function CharactersList({
           <Button type="submit">Load More</Button>
         </form>
       </div>
+      <LoadMoreIndicatorComponent loading={!isPending} />
     </Suspense>
   );
 }
