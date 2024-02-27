@@ -1,14 +1,21 @@
 'use client';
 
 import { Character } from '@/model/api.model';
-import { Suspense, useState, useTransition } from 'react';
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+} from 'react';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import loadMore from '@/actions/loadMore';
 import { rgbDataURL } from '@/lib/utils';
 import { ThumbSkeletonsComponent } from './ThumbSkeletonsComponent';
 import { CharacterListSkeleton } from './CharacterListSkeleton';
-import { LoadMoreIndicatorComponent } from './LoadMoreIndicatorComponent';
+import { ChevronDownCircle } from 'lucide-react';
 
 interface CharactersListProps {
   characters: Character[];
@@ -21,14 +28,45 @@ export default function CharactersList({
 }: CharactersListProps) {
   const [characterList, setCharacterList] = useState(characters);
   const [isPending, setTransition] = useTransition();
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const onLoadAction = () => {
+  const onLoadAction = useCallback(() => {
     if (characterList.length > pageTotal) return;
     setTransition(async () => {
       const _charList = await loadMore(characterList.length);
       setCharacterList([...characterList, ..._charList]);
     });
-  };
+  }, [characterList, pageTotal]);
+
+  useEffect(() => {
+    // Create a new IntersectionObserver
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // If the element is in view, entry.isIntersecting will be true
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            onLoadAction();
+          }, 1000);
+        }
+      },
+      {
+        // Adjust the rootMargin to control when the callback is fired
+        rootMargin: '0px',
+      }
+    );
+
+    // Start observing the element with the ref
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      // Stop observing the element on cleanup
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [onLoadAction]);
 
   return (
     <Suspense fallback={<CharacterListSkeleton />}>
@@ -50,12 +88,10 @@ export default function CharactersList({
         ))}
 
         {isPending && <ThumbSkeletonsComponent />}
-
-        <form action={onLoadAction}>
-          <Button type="submit">Load More</Button>
-        </form>
       </div>
-      <LoadMoreIndicatorComponent loading={!isPending} />
+      <div className="flex w-full p-2 justify-center" ref={loadMoreRef}>
+        <ChevronDownCircle className="h-6 w-6 animate-bounce" />
+      </div>
     </Suspense>
   );
 }
