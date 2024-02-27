@@ -43,7 +43,7 @@ export default function CharactersList({
     const observer = new IntersectionObserver(
       ([entry]) => {
         // If the element is in view, entry.isIntersecting will be true
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !isPending) {
           setTimeout(() => {
             onLoadAction();
           }, 1000);
