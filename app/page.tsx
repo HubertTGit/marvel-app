@@ -5,7 +5,7 @@ import { Character } from '@/model/api.model';
 import { Suspense } from 'react';
 
 export default async function Home() {
-  const url = uri('characters');
+  const url = uri('characters', 100, 0);
   const getData = await fetch(url);
   const result = await getData.json();
   const characters: Character[] = result.data.results;

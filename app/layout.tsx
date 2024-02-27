@@ -21,11 +21,11 @@ export default function RootLayout({
     <ThemeProvider defaultTheme="light" storageKey="theme">
       <html lang="en">
         <body className={inter.className}>
+          <SideNavigationComponent />
+
           <HeadingComponent />
-          <main className="grid grid-cols-12">
-            <SideNavigationComponent />
-            <section className=" col-span-11">{children}</section>
-          </main>
+
+          <section className="ml-[105px] mt-[60px]">{children}</section>
         </body>
       </html>
     </ThemeProvider>

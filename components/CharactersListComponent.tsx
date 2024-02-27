@@ -43,7 +43,7 @@ export default function CharactersList({
     const observer = new IntersectionObserver(
       ([entry]) => {
         // If the element is in view, entry.isIntersecting will be true
-        if (entry.isIntersecting && !isPending) {
+        if (entry.isIntersecting) {
           setTimeout(() => {
             onLoadAction();
           }, 1000);
@@ -70,7 +70,7 @@ export default function CharactersList({
 
   return (
     <Suspense fallback={<CharacterListSkeleton />}>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 justify-center">
         {characterList.map((character: Character) => (
           <div key={character.id} className="w-[150px] h-[150px] relative">
             <Image
