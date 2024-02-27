@@ -70,7 +70,7 @@ export default function CharactersList({
 
   return (
     <Suspense fallback={<CharacterListSkeleton />}>
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-6 justify-center">
         {characterList.map((character: Character) => (
           <div key={character.id} className="w-[150px] h-[150px] relative">
             <Image
@@ -80,7 +80,7 @@ export default function CharactersList({
               placeholder="blur"
               blurDataURL={rgbDataURL(237, 181, 6)}
               alt={character.name}
-              className="rounded-md absolute transition-transform object-cover hover:scale-110 duration-150 ease-in-out cursor-pointer"
+              className="rounded-md absolute transition-transform object-cover hover:scale-150 hover:z-10 duration-150 ease-in-out cursor-pointer"
             />
 
             <h3 className="absolute left-1 drop-shadow">{character.name}</h3>
