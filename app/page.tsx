@@ -1,8 +1,8 @@
+import { CharacterListSkeleton } from '@/components/CharacterListSkeleton';
 import CharactersList from '@/components/CharactersListComponent';
 import { uri } from '@/lib/uri';
 import { Character } from '@/model/api.model';
-import { revalidatePath } from 'next/cache';
-import Image from 'next/image';
+import { Suspense } from 'react';
 
 export default async function Home() {
   const url = uri('characters');
@@ -10,11 +10,7 @@ export default async function Home() {
   const result = await getData.json();
   const characters: Character[] = result.data.results;
 
-  console.log(result);
-
   return (
-    <>
-      <CharactersList characters={characters} />
-    </>
+    <CharactersList characters={characters} pageTotal={result.data.total} />
   );
 }
