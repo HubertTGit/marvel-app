@@ -19,8 +19,8 @@ export const SideNavigationComponent = () => {
       className="fixed h-screen hover:w-[250px] w-[90px] bg-background z-20 transition-all flex flex-col justify-between top-0"
     >
       <div className="p-3">
-        <div className="mb-2 flex justify-center w-full">
-          <Image src={marvel} alt="alt" height={20} width={250} />
+        <div className="mb-2 flex justify-center w-full bg-red-500 py-2">
+          <Image src={marvel} alt="alt" height={25} />
         </div>
 
         <ul className="flex flex-col gap-2">

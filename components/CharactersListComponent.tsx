@@ -42,6 +42,7 @@ export default function CharactersList({
     if (characterList.length > pageTotal) return;
     setTransition(async () => {
       const _charList = await loadMore(characterList.length);
+      console.log('loadMore', _charList);
       setCharacterList([...characterList, ..._charList]);
     });
   }, [characterList, pageTotal]);
