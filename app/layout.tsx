@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/providers/theme.provider';
 import { HeadingComponent } from '@/components/HeadingComponent';
 import { SideNavigationComponent } from '@/components/SideNavigationComponent';
+import { Toaster } from '@/components/ui/sonner';
 
 const inter = Josefin_Sans({ weight: ['700'], subsets: ['latin'] });
 
@@ -24,8 +25,8 @@ export default function RootLayout({
           <SideNavigationComponent />
 
           <HeadingComponent />
-
           <section className="ml-[105px] mt-[60px]">{children}</section>
+          <Toaster className=" bg-destructive" />
         </body>
       </html>
     </ThemeProvider>

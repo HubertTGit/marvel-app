@@ -6,10 +6,12 @@ import { Character } from '@/model/api.model';
 export default async function loadMore(
   currentLength: number
 ): Promise<Character[]> {
-  const url = uri('characters', 20, currentLength);
-  const getData = await fetch(url);
-  const result = await getData.json();
-  console.log(result);
-
-  return result.data.results;
+  try {
+    const url = uri('characters', 20, currentLength);
+    const getData = await fetch(url);
+    const result = await getData.json();
+    return result.data.results;
+  } catch (error) {
+    throw new Error('Fetch has failed due to limit usage reached.');
+  }
 }

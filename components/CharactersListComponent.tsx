@@ -24,6 +24,7 @@ import {
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 import Link from 'next/link';
 import { LinkIconComponent } from './LinkIconComponent';
+import { toast } from 'sonner';
 
 interface CharactersListProps {
   characters: Character[];
@@ -37,13 +38,18 @@ export default function CharactersList({
   const [characterList, setCharacterList] = useState(characters);
   const [isPending, setTransition] = useTransition();
   const loadMoreRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
 
   const onLoadAction = useCallback(() => {
     if (characterList.length > pageTotal) return;
     setTransition(async () => {
-      const _charList = await loadMore(characterList.length);
-      console.log('loadMore', _charList);
-      setCharacterList([...characterList, ..._charList]);
+      try {
+        const _charList = await loadMore(characterList.length);
+        setCharacterList([...characterList, ..._charList]);
+      } catch (error: any) {
+        scrollerRef.current?.scrollIntoView({ behavior: 'smooth' });
+        toast(error.message);
+      }
     });
   }, [characterList, pageTotal]);
 
@@ -55,7 +61,7 @@ export default function CharactersList({
         if (entry.isIntersecting) {
           setTimeout(() => {
             onLoadAction();
-          }, 1000);
+          }, 1500);
         }
       },
       {
@@ -78,8 +84,8 @@ export default function CharactersList({
   }, [onLoadAction]);
 
   return (
-    <Suspense fallback={<CharacterListSkeleton />}>
-      <div className="flex flex-wrap gap-6 justify-center">
+    <>
+      <div className="flex flex-wrap gap-6 justify-center" ref={scrollerRef}>
         {characterList.map((character: Character) => (
           <div key={character.id} className="w-[150px] h-[150px] relative">
             <Dialog>
@@ -150,6 +156,6 @@ export default function CharactersList({
       <div className="flex w-full p-2 justify-center" ref={loadMoreRef}>
         <ChevronDownCircle className="h-6 w-6 animate-bounce" />
       </div>
-    </Suspense>
+    </>
   );
 }
