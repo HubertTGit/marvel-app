@@ -1,7 +1,7 @@
 'use server';
 
 import { uri } from '@/lib/uri';
-import { Character } from '@/model/api.model';
+import { Character } from '@/model/api.characters.model';
 
 export default async function loadMore(
   currentLength: number

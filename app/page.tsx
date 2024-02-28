@@ -1,6 +1,6 @@
 import CharactersList from '@/components/CharactersListComponent';
 import { uri } from '@/lib/uri';
-import { Character } from '@/model/api.model';
+import { Character } from '@/model/api.characters.model';
 
 export default async function Home() {
   const url = uri('characters', 100, 0);

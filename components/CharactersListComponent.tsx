@@ -1,26 +1,13 @@
 'use client';
 
-import { Character } from '@/model/api.model';
-import {
-  Suspense,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useTransition,
-} from 'react';
+import { Character } from '@/model/api.characters.model';
+import { useCallback, useEffect, useRef, useState, useTransition } from 'react';
 import Image from 'next/image';
-import { Button, buttonVariants } from './ui/button';
+import { buttonVariants } from './ui/button';
 import loadMore from '@/actions/loadMore';
 import { rgbDataURL } from '@/lib/utils';
 import { ThumbSkeletonsComponent } from './ThumbSkeletonsComponent';
-import { CharacterListSkeleton } from './CharacterListSkeleton';
-import {
-  ChevronDownCircle,
-  LibraryBig,
-  BookMarked,
-  MessageCircleMore,
-} from 'lucide-react';
+import { ChevronDownCircle } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 import Link from 'next/link';
 import { LinkIconComponent } from './LinkIconComponent';
