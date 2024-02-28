@@ -4,7 +4,7 @@ This project is to demonstrate infinite scroll in Nextjs app using progressive s
 
 Demo: [Marvel App](https://sliding-puzzle-chi.vercel.app/)
 
-![Marvel](https://private-user-images.githubusercontent.com/98665493/308486673-c2c7e90c-64b5-4810-ab01-0d04ad6dca90.png)
+![Marvel](https://github.com/HubertTGit/marvel-app/assets/98665493/c2c7e90c-64b5-4810-ab01-0d04ad6dca90)
 
 ## Features
 
