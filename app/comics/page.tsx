@@ -1,7 +1,7 @@
-export default function ComicsPage() {
-  return (
-    <div>
-      <h1>Comics</h1>
-    </div>
-  );
+import CharactersList from '@/components/CharactersListComponent';
+import { uri } from '@/lib/uri';
+import { Character } from '@/model/api.model';
+
+export default async function ComicsPage() {
+  return <p>Comics coming soon ...</p>;
 }

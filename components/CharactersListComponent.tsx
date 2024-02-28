@@ -10,13 +10,20 @@ import {
   useTransition,
 } from 'react';
 import Image from 'next/image';
-import { Button } from './ui/button';
+import { Button, buttonVariants } from './ui/button';
 import loadMore from '@/actions/loadMore';
 import { rgbDataURL } from '@/lib/utils';
 import { ThumbSkeletonsComponent } from './ThumbSkeletonsComponent';
 import { CharacterListSkeleton } from './CharacterListSkeleton';
-import { ChevronDownCircle } from 'lucide-react';
+import {
+  ChevronDownCircle,
+  LibraryBig,
+  BookMarked,
+  MessageCircleMore,
+} from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
+import Link from 'next/link';
+import { LinkIconComponent } from './LinkIconComponent';
 
 interface CharactersListProps {
   characters: Character[];
@@ -83,22 +90,48 @@ export default function CharactersList({
                   placeholder="blur"
                   blurDataURL={rgbDataURL(237, 181, 6)}
                   alt={character.name}
-                  className="rounded-md absolute transition-transform object-cover hover:scale-150 hover:z-10 duration-150 ease-in-out cursor-pointer"
+                  className="rounded-md absolute transition-transform object-cover hover:scale-125 hover:z-10 duration-150 ease-in-out cursor-pointer"
                 />
               </DialogTrigger>
               <DialogContent>
                 <h1 className="text-xl">{character.name}</h1>
                 <div className="flex gap-3">
-                  <Image
-                    src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                    width={150}
-                    height={150}
-                    placeholder="blur"
-                    blurDataURL={rgbDataURL(237, 181, 6)}
-                    alt={character.name}
-                    className="rounded-full h-[150px] w-[150px] object-cover"
-                  />
-                  <p>
+                  <div>
+                    <Image
+                      src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                      width={150}
+                      height={150}
+                      placeholder="blur"
+                      blurDataURL={rgbDataURL(237, 181, 6)}
+                      alt={character.name}
+                      className="rounded-full h-[150px] w-[150px] object-cover"
+                    />
+                    <div className="mt-2">
+                      <ul className="flex gap-1">
+                        {character.urls.map((url) => (
+                          <li key={url.type}>
+                            <Link
+                              title={url.type}
+                              href={url.url}
+                              target="_blank"
+                              className={buttonVariants({
+                                variant: 'outline',
+                              })}
+                            >
+                              <LinkIconComponent type={url.type} />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <p
+                    className={`${
+                      character.description.length === 0 &&
+                      'flex justify-center items-center h-[150px] w-full'
+                    }`}
+                  >
                     {character.description.length
                       ? character.description
                       : 'description not available'}

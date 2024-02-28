@@ -1,8 +1,6 @@
-import { CharacterListSkeleton } from '@/components/CharacterListSkeleton';
 import CharactersList from '@/components/CharactersListComponent';
 import { uri } from '@/lib/uri';
 import { Character } from '@/model/api.model';
-import { Suspense } from 'react';
 
 export default async function Home() {
   const url = uri('characters', 100, 0);

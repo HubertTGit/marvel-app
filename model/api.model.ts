@@ -12,53 +12,53 @@ export interface Character {
   urls: URL[];
 }
 
-export interface Comics {
+interface Comics {
   available: number;
   collectionURI: string;
   items: ComicsItem[];
   returned: number;
 }
 
-export interface ComicsItem {
+interface ComicsItem {
   resourceURI: string;
   name: string;
 }
 
-export interface Stories {
+interface Stories {
   available: number;
   collectionURI: string;
   items: StoriesItem[];
   returned: number;
 }
 
-export interface StoriesItem {
+interface StoriesItem {
   resourceURI: string;
   name: string;
   type: ItemType;
 }
 
-export enum ItemType {
+enum ItemType {
   Cover = 'cover',
   Empty = '',
   InteriorStory = 'interiorStory',
 }
 
-export interface Thumbnail {
+interface Thumbnail {
   path: string;
   extension: Extension;
 }
 
-export enum Extension {
+enum Extension {
   GIF = 'gif',
   Jpg = 'jpg',
 }
 
-export interface URL {
+interface URL {
   type: URLType;
   url: string;
 }
 
-export enum URLType {
+enum URLType {
   Comiclink = 'comiclink',
   Detail = 'detail',
   Wiki = 'wiki',
