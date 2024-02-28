@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { useEffect } from 'react';
 
 type ErrorProps = {
@@ -15,7 +16,9 @@ export default function Error({ error, reset }: ErrorProps) {
   return (
     <div>
       <h2>{error.message}</h2>
-      <button onClick={reset}>Try again</button>
+      <Button onClick={reset} variant="outline">
+        Try again
+      </Button>
     </div>
   );
 }
