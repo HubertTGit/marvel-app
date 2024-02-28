@@ -1,6 +1,4 @@
-import CharactersList from '@/components/CharactersListComponent';
 import { uri } from '@/lib/uri';
-import { Character } from '@/model/api.characters.model';
 import { Comics, ComicsData } from '@/model/api.comics.model';
 import Image from 'next/image';
 
