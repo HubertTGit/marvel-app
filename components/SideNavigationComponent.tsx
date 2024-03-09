@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { buttonVariants } from '@/components/ui/button';
-import { Drama, BookOpenIcon, Boxes } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import Image from 'next/image';
-import marvel from '@/public/marvel.svg';
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { Drama, BookOpenIcon, Boxes } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import Image from "next/image";
+import marvel from "@/public/marvel.svg";
 
 export const SideNavigationComponent = () => {
   const [showAll, setShowAll] = useState(false);
@@ -16,10 +16,10 @@ export const SideNavigationComponent = () => {
     <aside
       onMouseEnter={() => setShowAll(true)}
       onMouseLeave={() => setShowAll(false)}
-      className="fixed h-screen hover:w-[250px] w-[90px] bg-background z-20 transition-all flex flex-col justify-between top-0"
+      className="fixed top-0 z-20 flex h-screen w-[90px] flex-col justify-between bg-background transition-all hover:w-[250px]"
     >
       <div className="p-3">
-        <div className="mb-2 flex justify-center w-full bg-red-500 py-2">
+        <div className="mb-2 flex w-full justify-center bg-red-500 py-2">
           <Image src={marvel} alt="alt" height={25} />
         </div>
 
@@ -28,39 +28,39 @@ export const SideNavigationComponent = () => {
             <Link
               href="/"
               className={`w-full ${buttonVariants({
-                variant: pathname === '/' ? 'default' : 'outline',
+                variant: pathname === "/" ? "default" : "outline",
               })}`}
             >
-              <Drama className="h-[1.2rem] w-[1.2rem] mr-2" />
-              <span className={showAll ? 'inline' : 'hidden'}>Characters</span>
+              <Drama className="mr-2 h-[1.2rem] w-[1.2rem]" />
+              <span className={showAll ? "inline" : "hidden"}>Characters</span>
             </Link>
           </li>
           <li>
             <Link
               href="creators"
-              className={`w-full ${buttonVariants({
-                variant: pathname === '/creators' ? 'default' : 'outline',
+              className={` ${buttonVariants({
+                variant: pathname === "/creators" ? "default" : "outline",
               })}`}
             >
-              <Boxes className="h-[1.2rem] w-[1.2rem] mr-2" />
-              <span className={showAll ? 'inline' : 'hidden'}>Creators</span>
+              <Boxes className="mr-2 h-[1.2rem] w-[1.2rem]" />
+              <span className={showAll ? "inline" : "hidden"}>Creators</span>
             </Link>
           </li>
           <li>
             <Link
               href="comics"
-              className={`w-full ${buttonVariants({
-                variant: pathname === '/comics' ? 'default' : 'outline',
+              className={` ${buttonVariants({
+                variant: pathname === "/comics" ? "default" : "outline",
               })}`}
             >
-              <BookOpenIcon className="h-[1.2rem] w-[1.2rem] mr-2" />
-              <span className={showAll ? 'inline' : 'hidden'}>Comics</span>
+              <BookOpenIcon className="mr-2 h-[1.2rem] w-[1.2rem]" />
+              <span className={showAll ? "inline" : "hidden"}>Comics</span>
             </Link>
           </li>
         </ul>
       </div>
 
-      <p className="p-3 text-xs text-center">
+      <p className="p-3 text-center text-xs">
         <Link href="http://marvel.com" target="_blank">
           © 2024 MARVEL
         </Link>

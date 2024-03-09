@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import loadMore from "@/actions/loadMore";
 import { toast } from "sonner";
 import { GridlistComponent } from "./GridListComponent";
+import { useSearchParams } from "next/navigation";
 
 interface CharactersListProps {
   characters: Character[];
@@ -18,6 +19,9 @@ export default function CharactersList({
   const [characterList, setCharacterList] = useState(characters);
   const [isPending, setTransition] = useTransition();
   const gridRef = useRef<any>();
+  const queryParam = useSearchParams();
+  const display = queryParam.get("display");
+  const isGrid = display === "grid";
 
   const onLoadAction = useCallback(() => {
     if (characterList.length > pageTotal) return;
@@ -66,11 +70,15 @@ export default function CharactersList({
 
   return (
     <>
-      <GridlistComponent
-        characterList={characterList}
-        isPending={isPending}
-        ref={gridRef}
-      />
+      {isGrid ? (
+        <GridlistComponent
+          characterList={characterList}
+          isPending={isPending}
+          ref={gridRef}
+        />
+      ) : (
+        <div>Table</div>
+      )}
     </>
   );
 }
