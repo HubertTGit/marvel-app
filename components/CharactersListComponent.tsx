@@ -58,6 +58,10 @@ export default function CharactersList({
       },
     );
 
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
     // Start observing the element with the ref
     return () => {
       // Stop observing the element on cleanup
