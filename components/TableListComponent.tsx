@@ -1,8 +1,16 @@
 "use client";
 
 import { Character } from "@/model/api.characters.model";
-import { forwardRef, useImperativeHandle, useRef } from "react";
-import { Table, TableHead, TableHeader, TableRow } from "./ui/table";
+import { Fragment, forwardRef, useImperativeHandle, useRef } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./ui/table";
+import { ChevronDownCircle } from "lucide-react";
 
 interface TableListComponentProps {
   characterList: Character[];
@@ -27,16 +35,36 @@ const _TableListComponent = forwardRef<any, TableListComponentProps>(
     );
 
     return (
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Author</TableHead>
-            <TableHead>Comics#</TableHead>
-            <TableHead>Character#</TableHead>
-          </TableRow>
-        </TableHeader>
-      </Table>
+      <div className="p-2 px-5" ref={scrollerRef}>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Comics#</TableHead>
+              <TableHead>Series#</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {characterList.map((character) => (
+              <TableRow key={character.id}>
+                <TableCell className="font-medium">{character.name}</TableCell>
+                <TableCell>{character.comics.available}</TableCell>
+                <TableCell>{character.series.available}</TableCell>
+              </TableRow>
+            ))}
+            <TableRow>
+              <TableCell colSpan={3}>
+                <div
+                  className="flex w-full justify-center p-2"
+                  ref={loadMoreRef}
+                >
+                  <ChevronDownCircle className="h-6 w-6 animate-bounce" />
+                </div>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
     );
   },
 );

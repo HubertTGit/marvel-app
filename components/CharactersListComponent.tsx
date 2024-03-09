@@ -6,6 +6,7 @@ import loadMore from "@/actions/loadMore";
 import { toast } from "sonner";
 import { GridlistComponent } from "./GridListComponent";
 import { useSearchParams } from "next/navigation";
+import { TableListComponent } from "./TableListComponent";
 
 interface CharactersListProps {
   characters: Character[];
@@ -77,7 +78,11 @@ export default function CharactersList({
           ref={gridRef}
         />
       ) : (
-        <div>Table</div>
+        <TableListComponent
+          characterList={characterList}
+          isPending={isPending}
+          ref={gridRef}
+        />
       )}
     </>
   );
