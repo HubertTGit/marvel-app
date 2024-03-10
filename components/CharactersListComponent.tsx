@@ -38,7 +38,7 @@ export default function CharactersList({
   useEffect(() => {
     gridRef.current?.scrollerRef?.scrollIntoView({
       behavior: "smooth",
-      block: "center",
+      block: "nearest",
     });
   }, [displayType]);
 
@@ -91,4 +91,13 @@ export default function CharactersList({
       )}
     </>
   );
+}
+
+{
+  /* <DataTable
+          characterList={characterList}
+          columns={characterColumns}
+          isPending={isPending}
+          ref={gridRef}
+        /> */
 }

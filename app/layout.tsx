@@ -27,7 +27,7 @@ export default function RootLayout({
             <SideNavigationComponent />
 
             <HeadingComponent />
-            <section className="ml-[105px] mt-[60px]">{children}</section>
+            <section className="ml-[105px] mt-20">{children}</section>
             <Toaster className="bg-destructive" />
           </body>
         </html>

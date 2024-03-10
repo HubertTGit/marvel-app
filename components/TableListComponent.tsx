@@ -41,16 +41,16 @@ const _TableListComponent = forwardRef<any, TableListComponentProps>(
           <TableHeader className="sticky">
             <TableRow>
               <TableHead>Name</TableHead>
-              <TableHead>Comics#</TableHead>
-              <TableHead>Series#</TableHead>
+              <TableHead>Available Comics</TableHead>
+              <TableHead>Series</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {characterList.map((character) => (
               <TableRow key={character.id} className=" cursor-pointer">
                 <TableCell className="font-medium">{character.name}</TableCell>
-                <TableCell>{character.comics.available}</TableCell>
-                <TableCell>{character.series.available}</TableCell>
+                <TableCell>{character.comics.available} comics</TableCell>
+                <TableCell>{character.series.available} series</TableCell>
               </TableRow>
             ))}
 

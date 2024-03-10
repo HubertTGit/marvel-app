@@ -3,7 +3,7 @@
 import { Character } from "@/model/api.characters.model";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const tableColumns: ColumnDef<Character>[] = [
+export const characterColumns: ColumnDef<Character>[] = [
   {
     accessorKey: "name",
     header: "Name",
