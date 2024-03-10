@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/providers/theme.provider";
 import { HeadingComponent } from "@/components/HeadingComponent";
 import { SideNavigationComponent } from "@/components/SideNavigationComponent";
 import { Toaster } from "@/components/ui/sonner";
+import { Display, DisplayProvider } from "@/providers/data-display.provider";
 
 const inter = Josefin_Sans({ weight: ["700"], subsets: ["latin"] });
 
@@ -20,15 +21,17 @@ export default function RootLayout({
 }>) {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="theme">
-      <html lang="en">
-        <body className={inter.className}>
-          <SideNavigationComponent />
+      <DisplayProvider type="table">
+        <html lang="en">
+          <body className={inter.className}>
+            <SideNavigationComponent />
 
-          <HeadingComponent />
-          <section className="ml-[105px] mt-[60px]">{children}</section>
-          <Toaster className="bg-destructive" />
-        </body>
-      </html>
+            <HeadingComponent />
+            <section className="ml-[105px] mt-[60px]">{children}</section>
+            <Toaster className="bg-destructive" />
+          </body>
+        </html>
+      </DisplayProvider>
     </ThemeProvider>
   );
 }

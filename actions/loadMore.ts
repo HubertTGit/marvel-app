@@ -1,13 +1,13 @@
 "use server";
 
-import { uri } from "@/lib/uri";
+import { CHARACTER_ITEMS_LENGTH, uri } from "@/lib/uri";
 import { Character } from "@/model/api.characters.model";
 
 export default async function loadMore(
   currentLength: number,
 ): Promise<Character[]> {
   try {
-    const url = uri("characters", 100, currentLength);
+    const url = uri("characters", CHARACTER_ITEMS_LENGTH, currentLength);
     const getData = await fetch(url);
     const result = await getData.json();
     return result.data.results;

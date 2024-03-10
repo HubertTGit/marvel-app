@@ -5,33 +5,23 @@ import { ModeToggle } from "./theme.toggler";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Search, LayoutGrid, Table } from "lucide-react";
+import { Display, useDisplay } from "@/providers/data-display.provider";
 
 export const HeadingComponent = () => {
-  const queryParams = useSearchParams();
-  const path = usePathname();
-  const router = useRouter();
-  const display = queryParams.get("display");
-
-  const setView = (name: "table" | "grid") => {
-    if (display === "table") {
-      router.replace(`${path}?display=${name}`);
-    } else {
-      router.replace(`${path}?display=${name}`);
-    }
-  };
+  const { displayType, setDisplay } = useDisplay();
 
   return (
     <div className="fixed left-0 right-0 top-0 z-10 ml-[90px] bg-background">
       <div className="flex items-center justify-end gap-2 p-3">
         <Button
-          variant={display === "table" ? "outline" : "default"}
-          onClick={() => setView("grid")}
+          variant={displayType === Display.table ? "outline" : "default"}
+          onClick={() => setDisplay(Display.grid)}
         >
           <LayoutGrid />
         </Button>
         <Button
-          variant={display !== "table" ? "outline" : "default"}
-          onClick={() => setView("table")}
+          variant={displayType === Display.grid ? "outline" : "default"}
+          onClick={() => setDisplay(Display.table)}
         >
           <Table />
         </Button>

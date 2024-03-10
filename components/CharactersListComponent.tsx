@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { GridlistComponent } from "./GridListComponent";
 import { useSearchParams } from "next/navigation";
 import { TableListComponent } from "./TableListComponent";
+import { Display, useDisplay } from "@/providers/data-display.provider";
 
 interface CharactersListProps {
   characters: Character[];
@@ -20,9 +21,7 @@ export default function CharactersList({
   const [characterList, setCharacterList] = useState(characters);
   const [isPending, setTransition] = useTransition();
   const gridRef = useRef<any>();
-  const queryParam = useSearchParams();
-  const display = queryParam.get("display");
-  const isGrid = display === "grid";
+  const { displayType } = useDisplay();
 
   const onLoadAction = useCallback(() => {
     if (characterList.length > pageTotal) return;
@@ -45,6 +44,7 @@ export default function CharactersList({
         // If the element is in view, entry.isIntersecting will be true
         if (entry.isIntersecting) {
           setTimeout(() => {
+            console.log("load more");
             onLoadAction();
           }, 1500);
         }
@@ -71,7 +71,7 @@ export default function CharactersList({
 
   return (
     <>
-      {isGrid ? (
+      {displayType === Display.grid ? (
         <GridlistComponent
           characterList={characterList}
           isPending={isPending}

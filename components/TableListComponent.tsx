@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "./ui/table";
 import { ChevronDownCircle } from "lucide-react";
+import { TableRowSkeletonComponent } from "./TableRowSkeletonComponent";
 
 interface TableListComponentProps {
   characterList: Character[];
@@ -37,7 +38,7 @@ const _TableListComponent = forwardRef<any, TableListComponentProps>(
     return (
       <div className="p-2 px-5" ref={scrollerRef}>
         <Table>
-          <TableHeader>
+          <TableHeader className="static">
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Comics#</TableHead>
@@ -46,12 +47,14 @@ const _TableListComponent = forwardRef<any, TableListComponentProps>(
           </TableHeader>
           <TableBody>
             {characterList.map((character) => (
-              <TableRow key={character.id}>
+              <TableRow key={character.id} className=" cursor-pointer">
                 <TableCell className="font-medium">{character.name}</TableCell>
                 <TableCell>{character.comics.available}</TableCell>
                 <TableCell>{character.series.available}</TableCell>
               </TableRow>
             ))}
+
+            {isPending && <TableRowSkeletonComponent />}
             <TableRow>
               <TableCell colSpan={3}>
                 <div

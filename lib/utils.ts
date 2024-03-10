@@ -1,12 +1,13 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import { CHARACTER_ITEMS_LENGTH } from "./uri";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 const keyStr =
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
 const triplet = (e1: number, e2: number, e3: number) =>
   keyStr.charAt(e1 >> 2) +
@@ -14,7 +15,7 @@ const triplet = (e1: number, e2: number, e3: number) =>
   keyStr.charAt(((e2 & 15) << 2) | (e3 >> 6)) +
   keyStr.charAt(e3 & 63);
 
-export const emptyArray = new Array(20).fill(null);
+export const emptyArray = new Array(CHARACTER_ITEMS_LENGTH).fill(null);
 
 export const rgbDataURL = (r: number, g: number, b: number) =>
   `data:image/gif;base64,R0lGODlhAQABAPAA${
