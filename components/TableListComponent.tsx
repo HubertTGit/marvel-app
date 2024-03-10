@@ -38,7 +38,7 @@ const _TableListComponent = forwardRef<any, TableListComponentProps>(
     return (
       <div className="p-2 px-5" ref={scrollerRef}>
         <Table>
-          <TableHeader className="static">
+          <TableHeader className="sticky">
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Comics#</TableHead>

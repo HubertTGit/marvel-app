@@ -16,7 +16,7 @@ export const SideNavigationComponent = () => {
     <aside
       onMouseEnter={() => setShowAll(true)}
       onMouseLeave={() => setShowAll(false)}
-      className="fixed top-0 z-20 flex h-screen w-[90px] flex-col justify-between bg-background transition-all hover:w-[250px]"
+      className="fixed top-0 z-30 flex h-screen w-[90px] flex-col justify-between bg-slate-600 transition-all hover:w-[250px]"
     >
       <div className="p-3">
         <div className="mb-2 flex w-full justify-center bg-red-500 py-2">
@@ -31,30 +31,34 @@ export const SideNavigationComponent = () => {
                 variant: pathname === "/" ? "default" : "outline",
               })}`}
             >
-              <Drama className="mr-2 h-[1.2rem] w-[1.2rem]" />
-              <span className={showAll ? "inline" : "hidden"}>Characters</span>
+              <Drama className=" h-[1.2rem] w-[1.2rem]" />
+              <span className={showAll ? "ml-2 inline" : "hidden"}>
+                Characters
+              </span>
             </Link>
           </li>
           <li>
             <Link
               href="creators"
-              className={` ${buttonVariants({
+              className={`w-full ${buttonVariants({
                 variant: pathname === "/creators" ? "default" : "outline",
               })}`}
             >
-              <Boxes className="mr-2 h-[1.2rem] w-[1.2rem]" />
-              <span className={showAll ? "inline" : "hidden"}>Creators</span>
+              <Boxes className=" h-[1.2rem] w-[1.2rem]" />
+              <span className={showAll ? "ml-2 inline" : "hidden"}>
+                Creators
+              </span>
             </Link>
           </li>
           <li>
             <Link
               href="comics"
-              className={` ${buttonVariants({
+              className={`w-full ${buttonVariants({
                 variant: pathname === "/comics" ? "default" : "outline",
               })}`}
             >
-              <BookOpenIcon className="mr-2 h-[1.2rem] w-[1.2rem]" />
-              <span className={showAll ? "inline" : "hidden"}>Comics</span>
+              <BookOpenIcon className=" h-[1.2rem] w-[1.2rem]" />
+              <span className={showAll ? "ml-2 inline" : "hidden"}>Comics</span>
             </Link>
           </li>
         </ul>

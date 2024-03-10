@@ -11,7 +11,7 @@ export const HeadingComponent = () => {
   const { displayType, setDisplay } = useDisplay();
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-10 ml-[90px] bg-background">
+    <div className="fixed left-0 right-0 top-0 z-20 ml-[90px] bg-slate-600">
       <div className="flex items-center justify-end gap-2 p-3">
         <Button
           variant={displayType === Display.table ? "outline" : "default"}

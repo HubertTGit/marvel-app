@@ -5,7 +5,6 @@ import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import loadMore from "@/actions/loadMore";
 import { toast } from "sonner";
 import { GridlistComponent } from "./GridListComponent";
-import { useSearchParams } from "next/navigation";
 import { TableListComponent } from "./TableListComponent";
 import { Display, useDisplay } from "@/providers/data-display.provider";
 
@@ -37,6 +36,13 @@ export default function CharactersList({
   }, [characterList, pageTotal]);
 
   useEffect(() => {
+    gridRef.current?.scrollerRef?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, [displayType]);
+
+  useEffect(() => {
     const currentRef = gridRef?.current.loadMoreRef;
     // Create a new IntersectionObserver
     const observer = new IntersectionObserver(
@@ -44,7 +50,6 @@ export default function CharactersList({
         // If the element is in view, entry.isIntersecting will be true
         if (entry.isIntersecting) {
           setTimeout(() => {
-            console.log("load more");
             onLoadAction();
           }, 1500);
         }
@@ -67,7 +72,7 @@ export default function CharactersList({
         observer.unobserve(currentRef);
       }
     };
-  }, [onLoadAction]);
+  }, [onLoadAction, displayType]);
 
   return (
     <>
